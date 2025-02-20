@@ -14,9 +14,7 @@ export const createNewTask = async (req, res) => {
 // Get tasks for a user
 export const getTasksForUser = async (req, res) => {
   try {
-    const tasks = await taskModel
-      .find( req.params.uid )
-      .sort("timestamp");
+    const tasks = await taskModel.find(req.params.uid);
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: "Error getting tasks", error });

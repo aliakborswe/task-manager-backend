@@ -1,7 +1,7 @@
-const taskModel = require('../models/TaskModel');
+const taskModel = require("../models/TaskModel");
 
 // Add a new task
-export const createNewTask = async (req, res) => {
+exports.createNewTask = async (req, res) => {
   try {
     const newTask = new taskModel(req.body);
     await newTask.save();
@@ -9,10 +9,10 @@ export const createNewTask = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error creating task", error });
   }
-}
+};
 
 // Get tasks for a user
-export const getTasksForUser = async (req, res) => {
+exports.getTasksForUser = async (req, res) => {
   try {
     const tasks = await taskModel
       .find({ userId: req.params.userId })
@@ -21,14 +21,14 @@ export const getTasksForUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error getting tasks", error });
   }
-}
+};
 
 // Update a task
-export const updateTask = async (req, res) => {
-    const taskId = req.params.taskId;
+exports.updateTask = async (req, res) => {
+  const taskId = req.params.taskId;
   try {
     const updatedTask = await taskModel.findByIdAndUpdate(
-      {id: taskId},
+      { id: taskId },
       req.body,
       { new: true }
     );
@@ -36,15 +36,15 @@ export const updateTask = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error updating task", error });
   }
-}
+};
 
 // Delete a task
-export const deleteTask = async (req, res) => {
-    const taskId = req.params.taskId;
+exports.deleteTask = async (req, res) => {
+  const taskId = req.params.taskId;
   try {
-    await taskModel.findByIdAndDelete({id: taskId});
+    await taskModel.findByIdAndDelete({ id: taskId });
     res.status(200).json({ message: "Task deleted" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting task", error });
   }
-}
+};

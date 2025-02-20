@@ -9,5 +9,6 @@ router.post("/users", userController.createNewUser);
 router.get("/tasks/:userId", taskController.getTasksForUser);
 router.post("/tasks", taskController.createNewTask);  
 router.put("/tasks/:taskId", taskController.updateTask);
+router.delete("/tasks/:taskId", taskController.deleteTask);
 
 module.exports = router;

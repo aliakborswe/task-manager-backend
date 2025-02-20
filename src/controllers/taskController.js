@@ -3,7 +3,7 @@ const taskModel = require('../models/TaskModel');
 // Add a new task
 export const createNewTask = async (req, res) => {
   try {
-    const newTask = new Task(req.body);
+    const newTask = new taskModel(req.body);
     await newTask.save();
     res.status(201).json(newTask);
   } catch (error) {
@@ -25,14 +25,26 @@ export const getTasksForUser = async (req, res) => {
 
 // Update a task
 export const updateTask = async (req, res) => {
+    const taskId = req.params.taskId;
   try {
     const updatedTask = await taskModel.findByIdAndUpdate(
-      req.params.taskId,
+      {id: taskId},
       req.body,
       { new: true }
     );
     res.status(200).json(updatedTask);
   } catch (error) {
     res.status(500).json({ message: "Error updating task", error });
+  }
+}
+
+// Delete a task
+export const deleteTask = async (req, res) => {
+    const taskId = req.params.taskId;
+  try {
+    await taskModel.findByIdAndDelete({id: taskId});
+    res.status(200).json({ message: "Task deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting task", error });
   }
 }

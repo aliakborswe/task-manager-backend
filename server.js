@@ -22,7 +22,6 @@ app.use(
 app.get("/", (_req, res) => {
   res.send("Welcome to Task Manager App");
 });
-
 app.get("/health", (_req, res) => {
   res.send("Success");
 });

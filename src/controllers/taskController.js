@@ -22,3 +22,17 @@ export const getTasksForUser = async (req, res) => {
     res.status(500).json({ message: "Error getting tasks", error });
   }
 }
+
+// Update a task
+export const updateTask = async (req, res) => {
+  try {
+    const updatedTask = await taskModel.findByIdAndUpdate(
+      req.params.taskId,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating task", error });
+  }
+}

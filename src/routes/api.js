@@ -8,5 +8,6 @@ router.post("/users", userController.createNewUser);
 // task routes
 router.get("/tasks/:userId", taskController.getTasksForUser);
 router.post("/tasks", taskController.createNewTask);  
+router.put("/tasks/:taskId", taskController.updateTask);
 
 module.exports = router;

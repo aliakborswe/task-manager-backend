@@ -1,15 +1,25 @@
-const router = require("express").Router();
-const userController = require("../controllers/userController");
-const taskController = require("../controllers/taskController");
+import { Router } from "express";
+import {
+  getUserByEmail,
+  createNewUser,
+} from "../controllers/userController.js";
+import {
+  getTasksForUser,
+  createNewTask,
+  updateTask,
+  deleteTask,
+} from "../controllers/taskController.js";
+
+const router = Router();
 
 // user routes
-router.get("/users/:email", userController.getUserByEmail);
-router.post("/users", userController.createNewUser);
+router.get("/users/:email", getUserByEmail);
+router.post("/users", createNewUser);
 
 // task routes
-router.get("/tasks/:userId", taskController.getTasksForUser);
-router.post("/tasks", taskController.createNewTask);
-router.put("/tasks/:taskId", taskController.updateTask);
-router.delete("/tasks/:taskId", taskController.deleteTask);
+router.get("/tasks/:userId", getTasksForUser);
+router.post("/tasks", createNewTask);
+router.put("/tasks/:taskId", updateTask);
+router.delete("/tasks/:taskId", deleteTask);
 
-module.exports = router;
+export default router;

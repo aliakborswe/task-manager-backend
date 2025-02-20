@@ -2,6 +2,7 @@
   "name": "task-manager-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -18,5 +19,8 @@
     "mongoose": "^8.10.1",
     "nodemon": "^3.1.9",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0"
   }
 }

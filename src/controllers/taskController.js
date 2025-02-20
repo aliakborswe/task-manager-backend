@@ -1,7 +1,7 @@
-const taskModel = require("../models/TaskModel");
+import taskModel from "../models/TaskModel.js";
 
 // Add a new task
-exports.createNewTask = async (req, res) => {
+export const createNewTask = async (req, res) => {
   try {
     const newTask = new taskModel(req.body);
     await newTask.save();
@@ -12,7 +12,7 @@ exports.createNewTask = async (req, res) => {
 };
 
 // Get tasks for a user
-exports.getTasksForUser = async (req, res) => {
+export const getTasksForUser = async (req, res) => {
   try {
     const tasks = await taskModel
       .find({ userId: req.params.userId })
@@ -24,7 +24,7 @@ exports.getTasksForUser = async (req, res) => {
 };
 
 // Update a task
-exports.updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
   const taskId = req.params.taskId;
   try {
     const updatedTask = await taskModel.findByIdAndUpdate(
@@ -39,7 +39,7 @@ exports.updateTask = async (req, res) => {
 };
 
 // Delete a task
-exports.deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
   const taskId = req.params.taskId;
   try {
     await taskModel.findByIdAndDelete({ id: taskId });

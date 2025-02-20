@@ -34,12 +34,11 @@ app.get("/health", (_req, res) => {
 // MongoDB Connection and Server
 const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ltyf59a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
 mongoose
-  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error(err));
 
 app.use("/api/v1", router);
-
 
 // Real-time updates with Change Streams
 const db = mongoose.connection;
@@ -48,7 +47,7 @@ db.once("open", () => {
 
   const taskChangeStream = db.collection("tasks").watch();
   taskChangeStream.on("change", (change) => {
-    console.log("Change detected:", change);
+    // console.log("Change detected:", change);
 
     if (change.operationType === "insert") {
       io.emit("taskAdded", change.fullDocument);
@@ -67,10 +66,10 @@ db.once("open", () => {
 
 // WebSocket Connection
 io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
+  // console.log("A user connected:", socket.id);
 
   socket.on("disconnect", () => {
-    console.log("A user disconnected:", socket.id);
+    // console.log("A user disconnected:", socket.id);
   });
 });
 

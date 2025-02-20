@@ -15,7 +15,7 @@ export const createNewTask = async (req, res) => {
 export const getTasksForUser = async (req, res) => {
   try {
     const tasks = await taskModel
-      .find({ userId: req.params.userId })
+      .find( req.params.uid )
       .sort("timestamp");
     res.status(200).json(tasks);
   } catch (error) {
@@ -28,7 +28,7 @@ export const updateTask = async (req, res) => {
   const taskId = req.params.taskId;
   try {
     const updatedTask = await taskModel.findByIdAndUpdate(
-      { id: taskId },
+      { _id: taskId },
       req.body,
       { new: true }
     );
@@ -42,7 +42,7 @@ export const updateTask = async (req, res) => {
 export const deleteTask = async (req, res) => {
   const taskId = req.params.taskId;
   try {
-    await taskModel.findByIdAndDelete({ id: taskId });
+    await taskModel.findByIdAndDelete({ _id: taskId });
     res.status(200).json({ message: "Task deleted" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting task", error });

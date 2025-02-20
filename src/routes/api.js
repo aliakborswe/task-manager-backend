@@ -3,6 +3,7 @@ const userController = require('../controllers/userController')
 const taskController = require('../controllers/taskController')
 
 // user routes
+router.get("/users/:email", userController.getUserByEmail);
 router.post("/users", userController.createNewUser);
 
 // task routes

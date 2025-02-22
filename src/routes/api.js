@@ -8,6 +8,7 @@ import {
   createNewTask,
   updateTask,
   deleteTask,
+  updateTaskOrder,
 } from "../controllers/taskController.js";
 
 const router = Router();
@@ -18,8 +19,10 @@ router.post("/users", createNewUser);
 
 // task routes
 router.get("/tasks/:userId", getTasksForUser);
+router.put("/tasks/reorder", updateTaskOrder);
 router.post("/tasks", createNewTask);
 router.put("/tasks/:taskId", updateTask);
 router.delete("/tasks/:taskId", deleteTask);
+
 
 export default router;

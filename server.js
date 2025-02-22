@@ -11,7 +11,7 @@ const app = express();
 const server = createServer(app);
 const originOption =
   process.env.NODE_ENV === "production"
-    ? ["", "http://localhost:5173"]
+    ? ["https://todos56.netlify.app", "http://localhost:5173"]
     : "http://localhost:5173";
 const io = new Server(server, {
   cors: {

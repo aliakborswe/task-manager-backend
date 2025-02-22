@@ -9,19 +9,23 @@ import { createServer } from "http";
 
 const app = express();
 const server = createServer(app);
-const originOption =
-  process.env.NODE_ENV === "production"
-    ? ["https://todos56.netlify.app", "http://localhost:5173"]
-    : "http://localhost:5173";
+// Apply CORS Middleware
+app.use(
+  cors({
+    origin: ["https://todos56.netlify.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+app.use(express.json());
+
 const io = new Server(server, {
   cors: {
-    origin: originOption, // Adjust frontend URL if needed
+    origin: ["https://todos56.netlify.app", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
+  transports: ["websocket", "polling"], // Ensure WebSocket fallback
+  allowEIO3: true, // Support older clients if needed
 });
-
-app.use(express.json());
-app.use(cors());
 
 // Routes
 app.get("/", (_req, res) => {

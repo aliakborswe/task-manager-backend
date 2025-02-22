@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "os";
 
 const taskSchema = new mongoose.Schema(
   {
@@ -7,6 +8,7 @@ const taskSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    email: { type: String, required: true },
     title: {
       type: String,
       required: true,
